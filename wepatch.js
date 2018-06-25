@@ -18,17 +18,21 @@
     function preventClickRetainPress(ele) {
         $(ele).on({
             touchstart: function () {
+                if (WEPATCH.pcrpTouchStart) {WEPATCH.pcrpTouchStart()}
                 timer = setTimeout(function () {
+                    if (WEPATCH.pcrpTimeout) {WEPATCH.pcrpTimeout()}
                     timer = 0;
                     removeHandler(ele)
                 }, 500);
                 addHandler(ele)
             },
             touchmove: function () {
+                if (WEPATCH.pcrpTouchMove) {WEPATCH.pcrpTouchMove()}
                 clearTimeout(timer);
                 timer = 0;
             },
             touchend: function () {
+                if (WEPATCH.pcrpTouchEnd) {WEPATCH.pcrpTouchEnd()}
                 clearTimeout(timer);
                 return false;
             }
